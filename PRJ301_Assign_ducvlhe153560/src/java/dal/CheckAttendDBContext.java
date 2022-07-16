@@ -17,7 +17,7 @@ public class CheckAttendDBContext extends DBContext {
 
     public ArrayList<Check> getAllStudent(int sid) {
         ArrayList<Check> alist = new ArrayList<>();
-        String sql = "  select * from CheckAttendance ca , Student s\n"
+        String sql = "  select * from CheckAttedance ca , Student s\n"
                 + "  where ca.[SID]= s.SID  and ca.SlotID = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class CheckAttendDBContext extends DBContext {
     }
 
     public void insertAttendance(int sid, int stid, int checkAttend, String comment, String taker) {
-        String sql = "INSERT [CheckAttendance] ( [SlotID], [SID], [CheckAttendance], [Comment], [Taker], [RecordTime]) \n"
+        String sql = "INSERT [CheckAttedance] ( [SlotID], [SID], [CheckAttendance], [Comment], [Taker], [RecordTime]) \n"
                 + "VALUES ( ?, ?, ?, ?, ?, GETDATE())";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class CheckAttendDBContext extends DBContext {
         }
     }
     public void deleteSlot(int sid){
-      String sql = "delete CheckAttendance where SlotID =?";
+      String sql = "delete CheckAttedance where SlotID =?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sid);

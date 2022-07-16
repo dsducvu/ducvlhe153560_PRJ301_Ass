@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>CheckAttend</servlet-name>
+        <servlet-class>controller.CheckAttend</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupStudent</servlet-name>
+        <servlet-class>controller.GroupStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeachingSchedule</servlet-name>
+        <servlet-class>controller.TeachingSchedule</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCheckAttend</servlet-name>
+        <servlet-class>controller.UpdateCheckAttend</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckAttend</servlet-name>
+        <url-pattern>/CheckAttend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupStudent</servlet-name>
+        <url-pattern>/GroupStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeachingSchedule</servlet-name>
+        <url-pattern>/TeachingSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCheckAttend</servlet-name>
+        <url-pattern>/UpdateCheckAttend</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
