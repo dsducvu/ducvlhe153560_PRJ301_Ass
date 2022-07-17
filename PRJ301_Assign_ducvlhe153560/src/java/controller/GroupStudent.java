@@ -44,7 +44,7 @@ public class GroupStudent extends HttpServlet {
         ArrayList departmentlist = gdbc.getAllDep(term);
         ArrayList courselist = gdbc.getAllSubject(term, dept);
         ArrayList grouplist = gdbc.getAllGroup(term, dept, courseid);
-        ArrayList<Student> liststudent = sdbc.getAllStudent(group);
+        ArrayList<Student> liststudent = sdbc.getAllStudentByGroupCode(group);
         request.setAttribute("liststudent", liststudent);
         request.setAttribute("campuslist", campuslist);
         request.setAttribute("termlist", termlist);

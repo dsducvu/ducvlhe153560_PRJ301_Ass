@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.CheckAttendDBContext;
@@ -40,37 +39,25 @@ public class CheckAttend extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String status = request.getParameter("status");
+            CheckAttendDBContext cadbc = new CheckAttendDBContext();
+            StudentDBContext studbc = new StudentDBContext();
+            SlotDBContext sdbc = new SlotDBContext();
+            String sid = request.getParameter("sid");
+            ArrayList<Check> cklist = cadbc.getAllStudent(Integer.valueOf(sid));
+            Slot s = sdbc.getSlotById(Integer.valueOf(sid));
+            ArrayList<Student> stulist = studbc.getAllStudentByGroupCode(s.getGroup().getCode());
+            request.setAttribute("cklist", cklist);
+            request.setAttribute("stulist", stulist);
+            request.setAttribute("s", s);
             if ("false".equals(status)) {
-                CheckAttendDBContext cadbc = new CheckAttendDBContext();
-                StudentDBContext studbc = new StudentDBContext();
-                String sid = request.getParameter("sid");
-
-                SlotDBContext sdbc = new SlotDBContext();
-                ArrayList<Check> cklist = cadbc.getAllStudent(Integer.valueOf(sid));
-                Slot s = sdbc.getSlotById(Integer.valueOf(sid));
-                ArrayList<Student> stulist = studbc.getAllStudent(s.getGroup().getCode());
-                request.setAttribute("cklist", cklist);
-                request.setAttribute("stulist", stulist);
-                request.setAttribute("s", s);
                 request.getRequestDispatcher("CheckAttend.jsp").forward(request, response);
             }
             if ("true".equals(status)) {
-                GroupDBContext gdbc = new GroupDBContext();
-                CheckAttendDBContext cadbc = new CheckAttendDBContext();
-                StudentDBContext studbc = new StudentDBContext();
-                String sid = request.getParameter("sid");
-                SlotDBContext sdao = new SlotDBContext();
-                ArrayList<Check> cklist = cadbc.getAllStudent(Integer.valueOf(sid));
-                Slot s = sdao.getSlotById(Integer.valueOf(sid));
-                ArrayList<Student> stulist = studbc.getAllStudent(s.getGroup().getCode());
-                request.setAttribute("cklist", cklist);
-                request.setAttribute("stulist", stulist);
-                request.setAttribute("s", s);
                 request.getRequestDispatcher("Checked.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
-            response.getWriter().print("Lack parameter try again!");
+            response.getWriter().print(e);
         }
 
     }
@@ -103,11 +90,11 @@ public class CheckAttend extends HttpServlet {
             throws ServletException, IOException {
         SlotDBContext sdbc = new SlotDBContext();
         CheckAttendDBContext cadbc = new CheckAttendDBContext();
-        StudentDBContext studbc= new StudentDBContext();
+        StudentDBContext studbc = new StudentDBContext();
         String slotid = request.getParameter("sid");
         String instructorid = request.getParameter("instructorid");
         Slot s = sdbc.getSlotById(Integer.valueOf(slotid));
-        ArrayList<Student> stulist = studbc.getAllStudent(s.getGroup().getCode());
+        ArrayList<Student> stulist = studbc.getAllStudentByGroupCode(s.getGroup().getCode());
 
         for (Student student : stulist) {
             String checkbox = request.getParameter(String.valueOf(student.getCode()));

@@ -15,7 +15,7 @@ import model.Student;
  */
 public class StudentDBContext extends DBContext {
 
-    public ArrayList<Student> getAllStudent(String groupcode) {
+    public ArrayList<Student> getAllStudentByGroupCode(String groupcode) {
         ArrayList<Student> alist = new ArrayList<>();
         String sql = " select s.* , g.* from Student s, [Group] g, Enroll e\n"
                 + "  where s.SID = e.SID and g.GroupID = e.GroupID and g.GroupCode like ?";
@@ -35,6 +35,6 @@ public class StudentDBContext extends DBContext {
 
     public static void main(String[] args) {
         StudentDBContext StudentDAO = new StudentDBContext();
-        System.out.println(StudentDAO.getAllStudent("SE1631"));
+        System.out.println(StudentDAO.getAllStudentByGroupCode("SE1631"));
     }
 }

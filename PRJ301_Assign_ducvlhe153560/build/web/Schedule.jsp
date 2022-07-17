@@ -12,23 +12,13 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Check Attedance </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="TeachingSchedule">Schedule </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="GroupStudent">Display Group</a>
-                    </li>
-                </ul>
+        <h1>FPT University Academic Portal</h1>
+        <header style="width: 100%; background-color: lightgray;">
+            <div class="container">
+                <a href="TeachingSchedule">Schedule </a>
+                <a  href="GroupStudent" style="margin: 10px;"> Group Student</a>
             </div>
-        </nav>
+        </header>
         <div class="container">
             <form method="get" action="TeachingSchedule" class="viewTimeTable">
                 <div> Campus: 
@@ -36,16 +26,15 @@
                         <c:forEach var="c" items="${clist}" >
                             <option value="${c}">${c}</option>
                         </c:forEach>
-                    </select><br>
-                </div>
-                <div>
+                    </select>
                     Lecture: <input type="text" name="lecture" required>     
                     <input type="submit" value="View">
                 </div>
+                
             </form>
             <div class="row">
                 <table class="table table-bordered ">
-                    <thead class="bg-primary">
+                    <thead >
                         <tr>
                             <th>Slot</th>
                             <th>Date </th>
@@ -64,7 +53,7 @@
                                 <td style="width: 16%; ">${s.getGroup().getCode()}</td>
                                 <td style="width: 16%;">${s.getGroup().getSubject().getCode()}</td>
                                 <td style="width: 16%;">${s.getRoom().getCode()}</td>
-                                <td style="width: 16%;">${s.isStatus()?"<p style='color:green;'>Attend</p>":"<p style='color:red;'>Not yet</p>"}</td>
+                                <td style="width: 16%;">${s.isStatus()?"Attend":"Not yet"}</td>
                                 <c:if test="${s.isStatus()}">
                                     <th><a href="CheckAttend?sid=${s.getId()}&status=${s.isStatus()}">View</a></th>
                                 </c:if>

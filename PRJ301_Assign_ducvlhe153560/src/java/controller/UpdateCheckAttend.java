@@ -37,13 +37,13 @@ public class UpdateCheckAttend extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         SlotDBContext sdao = new SlotDBContext();
-        CheckAttendDBContext cadao = new CheckAttendDBContext();
-        StudentDBContext studao = new StudentDBContext();
+        CheckAttendDBContext cadbc = new CheckAttendDBContext();
+        StudentDBContext studbc = new StudentDBContext();
         String slotid = request.getParameter("sid");
         String instructorid = request.getParameter("instructorid");
         Slot s = sdao.getSlotById(Integer.valueOf(slotid));
-        ArrayList<Student> stulist = studao.getAllStudent(s.getGroup().getCode());
-        cadao.deleteSlot(Integer.valueOf(slotid));
+        ArrayList<Student> stulist = studbc.getAllStudentByGroupCode(s.getGroup().getCode());
+        cadbc.deleteSlot(Integer.valueOf(slotid));
         for (Student student : stulist) {
             String checkbox = request.getParameter(String.valueOf(student.getCode()));
             int checkstatus = 0;
@@ -53,7 +53,7 @@ public class UpdateCheckAttend extends HttpServlet {
                 checkstatus = 1;
             }
             response.getWriter().println(student.getCode() + "-" + checkbox);
-            cadao.insertAttendance(Integer.valueOf(slotid), student.getId(), checkstatus, "", instructorid);
+            cadbc.insertAttendance(Integer.valueOf(slotid), student.getId(), checkstatus, "", instructorid);
         }
         response.sendRedirect("TeachingSchedule");
     }

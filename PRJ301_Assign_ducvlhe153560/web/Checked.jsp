@@ -13,23 +13,13 @@
 
     <body>
         <c:set var = "i" scope = "page" value = "0"/>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Check Attedance </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="TeachingSchedule">Schedule </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="GroupStudent">Display Group</a>
-                    </li>
-                </ul>
+         <h1>FPT University Academic Portal</h1>
+        <header style="width: 100%; background-color: lightgray;">
+            <div class="container">
+                <a href="TeachingSchedule">Schedule </a>
+                <a  href="GroupStudent" style="margin: 10px;"> Group Student</a>
             </div>
-        </nav>
+        </header>
 
         <div class="container">
             <h1>Single Activity Attendance</h1>
